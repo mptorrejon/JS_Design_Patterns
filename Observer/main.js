@@ -3,7 +3,6 @@ function Click(){
 }
 
 Click.prototype = {
-
 	subscribe: function(fn){
 		this.handlers.push(fn);
 	},
@@ -16,7 +15,8 @@ Click.prototype = {
 		);
 	},
 	fire: function(o, thisObj){
-		var scope = thisObj || '';
+		console.log(thisObj);
+		var scope = thisObj || window;
 		this.handlers.forEach(function(item){
 			item.call(scope, o);
 		});
