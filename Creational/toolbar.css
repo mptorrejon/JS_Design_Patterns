@@ -1,0 +1,10 @@
+.toolbar {
+	display: inline-block;
+}
+
+.toolbar-item{
+	width: 20px;
+	height: 20px;
+	background: blue;
+	display: inline-block;
+}
