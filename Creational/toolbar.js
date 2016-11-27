@@ -1,5 +1,4 @@
 function ToolbarItem( itemElement ){
-	// console.log(itemElement);
 	this.__el = itemElement;
 	this.__el.addEventListener("click", this.toggleActiveState.bind(this) );
 }
@@ -7,9 +6,11 @@ function ToolbarItem( itemElement ){
 Object.defineProperties(ToolbarItem.prototype, {
 	enabled: {
 		get: function(){
+			console.log("enable get");
 			return !this.__el.classList.contains("disable");
 		},
 		set: function(value){
+			console.log("enable set");
 			if(value){
 				this.__el.classList.remove("disable");
 			}else{
@@ -19,29 +20,32 @@ Object.defineProperties(ToolbarItem.prototype, {
 	},
 	activated: {
 		get: function(){
-			return this.__el.classList.add("active");
+			console.log("getting");
+			return this.__el.classList.contains("active");
 		},
 		set: function(value){
+			console.log("setting");
+			console.log(value);
 			if(value){
 				this.__el.classList.add("active");
 			}else{
 				this.__el.classList.remove("active");
 			}
 		}
+	},
+	toggleActiveState:{
+		value: function(){
+			this.activated = !this.activated;
+		},
+		enumerable: true
 	}
 });
 
-ToolbarItem.prototype.toggleActiveState = function(){
-	this.actived = !this.activated;
-}
-
 var createToolbarItems = function(itemElements){
-	console.log(itemElements);
 	var items = [];
 	
 	[].forEach.call(itemElements, function(el, index, array) {
-		console.log(el);
-		var item = createToolbarItems(el);
+		var item = new ToolbarItem(el);
 		items.push(item);
 	});
 	return items;
